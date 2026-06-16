@@ -1,0 +1,236 @@
+/* ============================================ */
+/* 简易权限管理系统 - 后台管理样式                */
+/* ============================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* ===== 登录页 ===== */
+.login-wrapper {
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.login-box {
+    background: #fff; border-radius: 12px; padding: 48px 40px 36px;
+    width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,.15);
+}
+.login-box h2 {
+    text-align: center; margin-bottom: 8px; font-size: 24px; color: #1a1a2e;
+}
+.login-box .subtitle {
+    text-align: center; margin-bottom: 32px; color: #999; font-size: 13px;
+}
+.login-box .form-group { margin-bottom: 20px; }
+.login-box label {
+    display: block; margin-bottom: 6px; font-size: 13px; color: #555; font-weight: 500;
+}
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%; height: 44px; border: 1px solid #d9d9d9; border-radius: 6px;
+    padding: 0 14px; font-size: 14px; transition: border-color .2s;
+}
+.login-box input:focus { outline: none; border-color: #667eea; }
+.login-box .btn-login {
+    width: 100%; height: 44px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;
+    margin-top: 8px; transition: opacity .2s;
+}
+.login-box .btn-login:hover { opacity: .9; }
+.login-box .error-msg { color: #e74c3c; font-size: 13px; text-align: center; margin-top: 12px; min-height: 20px; }
+
+/* ===== 布局 ===== */
+.layout { display: flex; min-height: 100vh; }
+
+/* 侧边栏 */
+.sidebar {
+    width: 230px; background: #1a1a2e; color: #ccc;
+    display: flex; flex-direction: column; flex-shrink: 0;
+}
+.sidebar .logo {
+    height: 64px; display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sidebar .nav { flex: 1; padding: 12px 0; }
+.sidebar .nav a {
+    display: block; padding: 12px 28px; color: #a0a0b8; text-decoration: none;
+    font-size: 14px; transition: all .2s; border-left: 3px solid transparent;
+}
+.sidebar .nav a:hover,
+.sidebar .nav a.active {
+    color: #fff; background: rgba(255,255,255,.06); border-left-color: #667eea;
+}
+.sidebar .nav a i { margin-right: 10px; font-style: normal; }
+.sidebar .user-info {
+    padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.08);
+    font-size: 13px;
+}
+.sidebar .user-info .name { color: #fff; font-weight: 600; }
+.sidebar .user-info .role-tag {
+    display: inline-block; background: #667eea; color: #fff; font-size: 11px;
+    padding: 2px 8px; border-radius: 10px; margin-top: 4px;
+}
+.sidebar .btn-logout {
+    display: block; width: calc(100% - 40px); margin: 8px 20px 20px;
+    padding: 8px 0; text-align: center; background: rgba(255,255,255,.1);
+    color: #ccc; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;
+    text-decoration: none;
+}
+.sidebar .btn-logout:hover { background: rgba(255,255,255,.2); color: #fff; }
+
+/* 主内容区 */
+.main-content { flex: 1; display: flex; flex-direction: column; }
+.top-bar {
+    height: 64px; background: #fff; display: flex; align-items: center; padding: 0 28px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06); font-size: 16px; font-weight: 600;
+    justify-content: space-between;
+}
+.top-bar .breadcrumb { color: #1a1a2e; }
+.top-bar .welcome { font-size: 13px; color: #999; font-weight: 400; }
+.content { flex: 1; padding: 24px 28px; overflow-y: auto; }
+
+/* ===== 卡片 ===== */
+.card {
+    background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    padding: 24px; margin-bottom: 20px;
+}
+.card-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0;
+}
+.card-header h3 { font-size: 16px; color: #1a1a2e; }
+.card-header .subtitle { font-size: 12px; color: #999; }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-block; padding: 8px 18px; border-radius: 4px; font-size: 13px;
+    cursor: pointer; border: 1px solid transparent; transition: all .2s; text-decoration: none;
+}
+.btn-primary { background: #667eea; color: #fff; border-color: #667eea; }
+.btn-primary:hover { background: #5a6fd6; }
+.btn-success { background: #27ae60; color: #fff; }
+.btn-success:hover { background: #219a52; }
+.btn-danger { background: #e74c3c; color: #fff; }
+.btn-danger:hover { background: #c0392b; }
+.btn-warning { background: #f39c12; color: #fff; }
+.btn-warning:hover { background: #d68910; }
+.btn-default { background: #fff; color: #333; border-color: #d9d9d9; }
+.btn-default:hover { border-color: #667eea; color: #667eea; }
+.btn-sm { padding: 4px 12px; font-size: 12px; }
+.btn-xs { padding: 2px 8px; font-size: 11px; }
+.btn + .btn { margin-left: 8px; }
+
+/* ===== 表格 ===== */
+.table-wrapper { overflow-x: auto; }
+table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+}
+table th {
+    background: #fafafa; padding: 12px 14px; text-align: left; font-weight: 600;
+    color: #555; border-bottom: 2px solid #f0f0f0; white-space: nowrap;
+}
+table td {
+    padding: 10px 14px; border-bottom: 1px solid #f5f5f5; color: #666;
+}
+table tbody tr:hover { background: #fafbff; }
+table .actions { white-space: nowrap; }
+.badge {
+    display: inline-block; padding: 2px 10px; border-radius: 10px;
+    font-size: 11px; font-weight: 500;
+}
+.badge-success { background: #e6f9ee; color: #27ae60; }
+.badge-danger { background: #fde8e8; color: #e74c3c; }
+
+/* ===== 搜索框 ===== */
+.search-bar { margin-bottom: 16px; display: flex; gap: 10px; }
+.search-bar input {
+    height: 36px; padding: 0 12px; border: 1px solid #d9d9d9; border-radius: 4px;
+    font-size: 13px; width: 240px;
+}
+.search-bar input:focus { outline: none; border-color: #667eea; }
+
+/* ===== 模态框 ===== */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,.45); z-index: 1000; justify-content: center;
+    align-items: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+    background: #fff; border-radius: 8px; width: 480px; max-height: 80vh;
+    overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,.15);
+}
+.modal.small { width: 400px; }
+.modal-header {
+    padding: 16px 24px; border-bottom: 1px solid #f0f0f0;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.modal-header h4 { font-size: 15px; }
+.modal-close {
+    background: none; border: none; font-size: 20px; cursor: pointer;
+    color: #999; line-height: 1;
+}
+.modal-close:hover { color: #333; }
+.modal-body { padding: 20px 24px; }
+.modal-footer {
+    padding: 14px 24px; border-top: 1px solid #f0f0f0;
+    text-align: right;
+}
+.modal .form-group { margin-bottom: 16px; }
+.modal label {
+    display: block; margin-bottom: 6px; font-size: 13px; color: #555; font-weight: 500;
+}
+.modal input[type="text"],
+.modal input[type="password"],
+.modal input[type="email"],
+.modal select,
+.modal textarea {
+    width: 100%; height: 38px; padding: 0 12px; border: 1px solid #d9d9d9;
+    border-radius: 4px; font-size: 13px;
+}
+.modal textarea { height: 80px; padding: 8px 12px; resize: vertical; }
+.modal select { height: 38px; }
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus { outline: none; border-color: #667eea; }
+.modal .error-tip { color: #e74c3c; font-size: 12px; margin-top: 4px; display: none; }
+
+/* 角色权限分配用 checkbox */
+.checkbox-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.checkbox-list label {
+    display: flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer;
+    padding: 6px 14px; border: 1px solid #e8e8e8; border-radius: 4px; user-select: none;
+}
+.checkbox-list label:hover { border-color: #667eea; }
+.checkbox-list input[type="checkbox"]:checked + span { color: #667eea; font-weight: 600; }
+.checkbox-list label:has(input:checked) { border-color: #667eea; background: #f0f2ff; }
+
+/* ===== 消息提示 ===== */
+.toast {
+    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+    padding: 12px 28px; border-radius: 6px; color: #fff; font-size: 14px;
+    z-index: 2000; animation: fadeInDown .3s; box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+.toast-success { background: #27ae60; }
+.toast-error { background: #e74c3c; }
+.toast-warning { background: #f39c12; }
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    .sidebar { width: 60px; }
+    .sidebar .nav a { padding: 12px 16px; text-align: center; font-size: 0; }
+    .sidebar .nav a i { margin: 0; font-size: 18px; }
+    .sidebar .logo { font-size: 16px; letter-spacing: 0; }
+    .modal { width: 92%; }
+}
