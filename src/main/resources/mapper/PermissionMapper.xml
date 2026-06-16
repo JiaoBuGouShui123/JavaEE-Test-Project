@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.PermissionMapper">
+
+    <resultMap id="permissionMap" type="com.example.entity.Permission">
+        <id property="permId" column="perm_id"/>
+        <result property="permName" column="perm_name"/>
+        <result property="permCode" column="perm_code"/>
+        <result property="url" column="url"/>
+        <result property="description" column="description"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="permissionMap">
+        SELECT * FROM permission WHERE perm_id = #{permId}
+    </select>
+
+    <select id="selectAll" resultMap="permissionMap">
+        SELECT * FROM permission ORDER BY create_time DESC
+    </select>
+
+    <insert id="insert" parameterType="com.example.entity.Permission"
+            useGeneratedKeys="true" keyProperty="permId">
+        INSERT INTO permission (perm_name, perm_code, url, description, create_time)
+        VALUES (#{permName}, #{permCode}, #{url}, #{description}, #{createTime})
+    </insert>
+
+    <update id="update" parameterType="com.example.entity.Permission">
+        UPDATE permission
+        <set>
+            <if test="permName != null and permName != ''">perm_name = #{permName},</if>
+            <if test="permCode != null and permCode != ''">perm_code = #{permCode},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="description != null">description = #{description},</if>
+        </set>
+        WHERE perm_id = #{permId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM permission WHERE perm_id = #{permId}
+    </delete>
+
+    <!-- 通过 用户→用户角色→角色权限→权限 关联链查询 -->
+    <select id="selectByUserId" resultMap="permissionMap">
+        SELECT DISTINCT p.* FROM permission p
+        INNER JOIN role_permission rp ON p.perm_id = rp.perm_id
+        INNER JOIN user_role ur ON rp.role_id = ur.role_id
+        WHERE ur.user_id = #{userId}
+    </select>
+
+    <select id="selectByRoleId" resultMap="permissionMap">
+        SELECT p.* FROM permission p
+        INNER JOIN role_permission rp ON p.perm_id = rp.perm_id
+        WHERE rp.role_id = #{roleId}
+    </select>
+
+</mapper>

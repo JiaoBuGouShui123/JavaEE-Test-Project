@@ -20,7 +20,16 @@
     <!-- 3. 静态资源放行 -->
     <mvc:default-servlet-handler/>
 
-    <!-- 4. 视图解析器 -->
+    <!-- 4. 登录拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有 /api/** 路径的请求 -->
+            <mvc:mapping path="/api/**"/>
+            <bean class="com.example.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- 5. 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
