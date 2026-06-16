@@ -26,15 +26,17 @@ public class UserController {
         return (User) session.getAttribute("user");
     }
 
-    private Result<Void> requireAdmin(HttpSession session) {
+    /** 管理员权限检查，通过返回 null，失败返回错误 Result */
+    @SuppressWarnings("unchecked")
+    private <T> Result<T> requireAdmin(HttpSession session) {
         User currentUser = getCurrentUser(session);
         if (currentUser == null) {
-            return Result.error(401, "未登录");
+            return (Result<T>) Result.error(401, "未登录");
         }
         if (!userService.isAdmin(currentUser.getUserId())) {
-            return Result.error(403, "需要管理员权限");
+            return (Result<T>) Result.error(403, "需要管理员权限");
         }
-        return null; // null 表示检查通过
+        return null;
     }
 
     /**
@@ -42,7 +44,7 @@ public class UserController {
      */
     @GetMapping
     public Result<List<User>> listAll(HttpSession session) {
-        Result<Void> check = requireAdmin(session);
+        Result<List<User>> check = requireAdmin(session);
         if (check != null) return check;
         return Result.success(userService.listAll());
     }
@@ -52,7 +54,7 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public Result<User> getById(@PathVariable Long id, HttpSession session) {
-        Result<Void> check = requireAdmin(session);
+        Result<User> check = requireAdmin(session);
         if (check != null) return check;
         User user = userService.getById(id);
         if (user == null) {
@@ -143,7 +145,7 @@ public class UserController {
      */
     @GetMapping("/{userId}/roles")
     public Result<List<Role>> getUserRoles(@PathVariable Long userId, HttpSession session) {
-        Result<Void> check = requireAdmin(session);
+        Result<List<Role>> check = requireAdmin(session);
         if (check != null) return check;
         return Result.success(userService.getUserRoles(userId));
     }

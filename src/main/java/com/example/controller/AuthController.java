@@ -6,6 +6,7 @@ import com.example.entity.Role;
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,5 +67,26 @@ public class AuthController {
     public Result<Void> logout(HttpSession session) {
         session.invalidate();
         return Result.success("已退出登录", null);
+    }
+
+    /**
+     * 获取当前登录用户信息（含角色）
+     * GET /api/me
+     * 无需管理员权限，任何已登录用户均可调用
+     */
+    @GetMapping("/me")
+    public Result<Map<String, Object>> currentUser(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return Result.error(401, "未登录");
+        }
+
+        List<Role> roles = userService.getUserRoles(user.getUserId());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("user", user);
+        data.put("roles", roles);
+
+        return Result.success(data);
     }
 }

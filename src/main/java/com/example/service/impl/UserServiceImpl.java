@@ -50,6 +50,8 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.selectAll();
         for (User user : users) {
             user.setPassword(null);
+            // 填充每个用户的角色列表，供前端展示
+            user.setRoles(roleMapper.selectByUserId(user.getUserId()));
         }
         return users;
     }

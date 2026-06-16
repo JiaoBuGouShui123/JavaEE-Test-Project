@@ -25,13 +25,15 @@ public class PermissionController {
         return (User) session.getAttribute("user");
     }
 
-    private Result<Void> requireAdmin(HttpSession session) {
+    /** 管理员权限检查，通过返回 null，失败返回错误 Result */
+    @SuppressWarnings("unchecked")
+    private <T> Result<T> requireAdmin(HttpSession session) {
         User currentUser = getCurrentUser(session);
         if (currentUser == null) {
-            return Result.error(401, "未登录");
+            return (Result<T>) Result.error(401, "未登录");
         }
         if (!userService.isAdmin(currentUser.getUserId())) {
-            return Result.error(403, "需要管理员权限");
+            return (Result<T>) Result.error(403, "需要管理员权限");
         }
         return null;
     }

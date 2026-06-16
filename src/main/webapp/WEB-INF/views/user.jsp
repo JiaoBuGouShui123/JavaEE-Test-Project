@@ -19,7 +19,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th><th>用户名</th><th>邮箱</th><th>电话</th><th>状态</th><th>创建时间</th><th>操作</th>
+                    <th>ID</th><th>用户名</th><th>角色</th><th>邮箱</th><th>电话</th><th>状态</th><th>创建时间</th><th>操作</th>
                 </tr>
             </thead>
             <tbody id="userTableBody"></tbody>
@@ -99,6 +99,17 @@ function renderUsers(list) {
         html += '<tr>';
         html += '<td>' + u.userId + '</td>';
         html += '<td>' + u.username + '</td>';
+        // 角色列：显示用户拥有的角色名称
+        var rolesHtml = '';
+        if (u.roles && u.roles.length > 0) {
+            u.roles.forEach(function(r) {
+                var isAdmin = r.roleName === 'admin';
+                rolesHtml += '<span class="badge ' + (isAdmin ? 'badge-warning' : 'badge-info') + '" style="margin-right:4px;">' + r.roleName + '</span>';
+            });
+        } else {
+            rolesHtml = '<span style="color:#999;">无角色</span>';
+        }
+        html += '<td>' + rolesHtml + '</td>';
         html += '<td>' + (u.email||'-') + '</td>';
         html += '<td>' + (u.phone||'-') + '</td>';
         html += '<td><span class="badge ' + (u.status===1?'badge-success':'badge-danger') + '">' + (u.status===1?'启用':'禁用') + '</span></td>';
@@ -110,7 +121,7 @@ function renderUsers(list) {
         html += '<button class="btn btn-danger btn-xs" onclick="deleteUser(' + u.userId + ')">删除</button>';
         html += '</td></tr>';
     });
-    document.getElementById('userTableBody').innerHTML = html || '<tr><td colspan="7" style="text-align:center;color:#999;">暂无数据</td></tr>';
+    document.getElementById('userTableBody').innerHTML = html || '<tr><td colspan="8" style="text-align:center;color:#999;">暂无数据</td></tr>';
 }
 function filterUsers() {
     var kw = document.getElementById('searchUser').value.toLowerCase();

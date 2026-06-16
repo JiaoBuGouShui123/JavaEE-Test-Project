@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户实体类
@@ -13,6 +14,7 @@ public class User {
     private String phone;
     private Integer status;      // 1=启用, 0=禁用
     private Date createTime;
+    private List<Role> roles;    // 用户拥有的角色（仅用于展示，不持久化）
 
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
@@ -34,4 +36,7 @@ public class User {
 
     public Date getCreateTime() { return createTime; }
     public void setCreateTime(Date createTime) { this.createTime = createTime; }
+
+    public List<Role> getRoles() { return roles; }
+    public void setRoles(List<Role> roles) { this.roles = roles; }
 }
